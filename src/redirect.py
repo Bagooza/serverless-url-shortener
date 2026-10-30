@@ -12,8 +12,7 @@ def lambda_handler(event, context):
         return {"statusCode": 400, "body": "Missing code"}
 
     try:
-        # One call does both jobs: counts the click AND returns the item.
-        # The condition makes it fail (instead of creating a new item) if the code is unknown.
+        # a single call counts the click and fetches the URL
         result = table.update_item(
             Key={"code": code},
             UpdateExpression="ADD clicks :one",
